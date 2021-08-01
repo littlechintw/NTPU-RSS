@@ -72,7 +72,7 @@ def setDetails(news):
         return "no"
     link = "https://new.ntpu.edu.tw/news/" + news['_id']
     description = news['content'].replace("<p>&nbsp;</p>", "").replace("<o:p>", "<p>").replace("</o:p>", "</p>").replace("color=black", "color=\"black\"").replace("&nbsp;", "").replace("&", "-")
-    pubDate = news['createdAt']
+    pubDate = (datetime.datetime.strptime(news['publishAt'], '%Y-%m-%dT%H:%M:%S.000Z') + datetime.timedelta(hours = 8)).strftime(GMT_FORMAT)
     items.append(item(title, link, cleanMe(html.unescape(description)), pubDate))
 
 def createRSS(channel):
