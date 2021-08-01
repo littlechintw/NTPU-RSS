@@ -40,7 +40,7 @@ def getChannel():
 def getItem():
     now_time = str(time.strftime("%Y-%m-%dT%H:%M:%S.000Z", time.localtime()))
     post_data = {
-        "query": "{\npublications(\nsort: \"publishAt:desc,createdAt:desc\"\nstart: 0\nlimit: 200\nwhere: {\n  isEvent: false\n  sitesApproved_contains: \"www_ntpu\"\n  \n  lang_ne: \"chinese\"\n  tags_contains: [[]]\n  \n  publishAt_lte: \"" + now_time + "\" unPublishAt_gte: \"" + now_time + "\" \n}\n    ) {\n_id\ncreatedAt\ntitle\ncontent\ntitle_en\ncontent_en\ntags\ncoverImage {\n  url\n}\ncoverImageDesc\ncoverImageDesc_en\nbannerLink\nfiles {\n  url\n  name\n  mime\n}\nfileMeta\npublishAt\n    }}"
+        "query": "{\npublications(\nsort: \"publishAt:desc,createdAt:desc\"\nstart: 0\nlimit: 200\nwhere: {\n  isEvent: false\n  sitesApproved_contains: \"www_ntpu\"\n  \n  lang_ne: \"english\"\n  tags_contains: [[]]\n  \n  publishAt_lte: \"" + now_time + "\" unPublishAt_gte: \"" + now_time + "\" \n}\n    ) {\n_id\ncreatedAt\ntitle\ncontent\ntitle_en\ncontent_en\ntags\ncoverImage {\n  url\n}\ncoverImageDesc\ncoverImageDesc_en\nbannerLink\nfiles {\n  url\n  name\n  mime\n}\nfileMeta\npublishAt\n    }}"
     }
     r = requests.post('https://api.carrier.ntpu.edu.tw/strapi', data = post_data)
 
