@@ -68,6 +68,8 @@ def cleanMe(html):
 def setDetails(news):
     # PUT Vulnerability Details
     title = news['title']
+    if title == "":
+        return "no"
     link = "https://new.ntpu.edu.tw/news/" + news['_id']
     description = news['content'].replace("<p>&nbsp;</p>", "").replace("<o:p>", "<p>").replace("</o:p>", "</p>").replace("color=black", "color=\"black\"").replace("&nbsp;", "").replace("&", "-")
     pubDate = news['createdAt']
