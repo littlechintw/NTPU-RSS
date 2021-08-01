@@ -29,7 +29,7 @@ def getChannel():
     # GET XML Channel
     title = "NTPU 國立臺北大學 - 首頁公告"
     author = "NTPU 國立臺北大學"
-    image = "https://new.ntpu.edu.tw/favicon.ico"
+    image = "https://new.ntpu.edu.tw/assets/logo/ntpu_logo.png"
     link = "https://new.ntpu.edu.tw/news"
     description = "NTPU 國立臺北大學 - 首頁公告"
     language = "zh_TW"
@@ -40,7 +40,7 @@ def getChannel():
 def getItem():
     now_time = str(time.strftime("%Y-%m-%dT%H:%M:%S.000Z", time.localtime()))
     post_data = {
-        "query": "{\npublications(\nsort: \"publishAt:desc,createdAt:desc\"\nstart: 0\nlimit: 200\nwhere: {\n  isEvent: false\n  sitesApproved_contains: \"www_ntpu\"\n  \n  lang_ne: \"english\"\n  tags_contains: [[]]\n  \n  publishAt_lte: \"" + now_time + "\" unPublishAt_gte: \"" + now_time + "\" \n}\n    ) {\n_id\ncreatedAt\ntitle\ncontent\ntitle_en\ncontent_en\ntags\ncoverImage {\n  url\n}\ncoverImageDesc\ncoverImageDesc_en\nbannerLink\nfiles {\n  url\n  name\n  mime\n}\nfileMeta\npublishAt\n    }}"
+        "query": "{\npublications(\nsort: \"publishAt:desc,createdAt:desc\"\nstart: 0\nlimit: 20\nwhere: {\n  isEvent: false\n  sitesApproved_contains: \"www_ntpu\"\n  \n  lang_ne: \"english\"\n  tags_contains: [[]]\n  \n  publishAt_lte: \"" + now_time + "\" unPublishAt_gte: \"" + now_time + "\" \n}\n    ) {\n_id\ncreatedAt\ntitle\ncontent\ntitle_en\ncontent_en\ntags\ncoverImage {\n  url\n}\ncoverImageDesc\ncoverImageDesc_en\nbannerLink\nfiles {\n  url\n  name\n  mime\n}\nfileMeta\npublishAt\n    }}"
     }
     r = requests.post('https://api.carrier.ntpu.edu.tw/strapi', data = post_data)
 
