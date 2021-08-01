@@ -1,4 +1,4 @@
-import requests, sys, datetime, time, json
+import requests, sys, datetime, time, json, html
 from bs4 import BeautifulSoup
 
 # GMT Format
@@ -57,7 +57,7 @@ def setDetails(news):
     link = "https://new.ntpu.edu.tw/news/" + news['_id']
     description = news['content'].replace("<p>&nbsp;</p>", "")
     pubDate = news['createdAt']
-    items.append(item(title, link, description, pubDate))
+    items.append(item(title, link, html.unescape(description), pubDate))
 
 def createRSS(channel):
     
