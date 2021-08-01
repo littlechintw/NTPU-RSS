@@ -51,13 +51,27 @@ def getItem():
     for news in news_json:
         setDetails(news)
 
+def cleanMe(html):
+    soup = BeautifulSoup(html, "html.parser") # create a new bs4 object from the html data loaded
+    for script in soup(["script", "style"]): # remove all javascript and stylesheet code
+        script.extract()
+    # get text
+    text = soup.get_text()
+    # break into lines and remove leading and trailing space on each
+    lines = (line.strip() for line in text.splitlines())
+    # break multi-headlines into a line each
+    chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+    # drop blank lines
+    text = '\n'.join(chunk for chunk in chunks if chunk)
+    return text
+
 def setDetails(news):
     # PUT Vulnerability Details
     title = news['title']
     link = "https://new.ntpu.edu.tw/news/" + news['_id']
-    description = news['content'].replace("<p>&nbsp;</p>", "")
+    description = news['content'].replace("<p>&nbsp;</p>", "").replace("<o:p>", "<p>").replace("</o:p>", "</p>").replace("color=black", "color=\"black\"").replace("&nbsp;", "").replace("&", "-")
     pubDate = news['createdAt']
-    items.append(item(title, link, html.unescape(description), pubDate))
+    items.append(item(title, link, cleanMe(html.unescape(description)), pubDate))
 
 def createRSS(channel):
     
@@ -82,7 +96,7 @@ def createRSS(channel):
         rss_text += r'<item>' \
                     r'<title>{}</title>' \
                     r'<link>{}</link>' \
-                    r'<description><div>{}</div></description>' \
+                    r'<description>{}</description>' \
                     r'<pubDate>{}</pubDate>' \
                     r'</item>' \
             .format(item.title, item.pubDate, item.description, item.link)
