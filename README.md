@@ -1,0 +1,11 @@
+# NTPU-RSS
+NTPU-RSS provides RSS feeds for NTPU-RSS’s news list.
+
+## How to use?
+Paste the link in RSS Reader
+
+  - [NTPU 國立臺北大學 - 首頁公告](https://new.ntpu.edu.tw/news)
+    
+    ```
+    { wait for generate }
+    ```
