@@ -82,7 +82,7 @@ def createRSS(channel):
         rss_text += r'<item>' \
                     r'<title>{}</title>' \
                     r'<link>{}</link>' \
-                    r'<description>{}</description>' \
+                    r'<description><div>{}</div></description>' \
                     r'<pubDate>{}</pubDate>' \
                     r'</item>' \
             .format(item.title, item.pubDate, item.description, item.link)
