@@ -55,7 +55,7 @@ def setDetails(news):
     # PUT Vulnerability Details
     title = news['title']
     link = "https://new.ntpu.edu.tw/news/" + news['_id']
-    description = news['content']
+    description = news['content'].replace("<p>&nbsp;</p>", "")
     pubDate = news['createdAt']
     items.append(item(title, link, description, pubDate))
 
